@@ -1,0 +1,66 @@
+
+@import: stdjareport-with-id
+@import: figure-insert
+@require: itemize
+@require: code
+
+document (|
+  title = {class fileをいじってみた};
+  univ = {すやすや大学 ぽやぽや課程};
+  number = {XXXXXXXX};
+  author = {\@estis_jk};
+  date = {2020/10/02};
+  show-toc = true;
+|) '<
+  +p{
+    このファイル群はデフォルトで入れてくださっていた, stdjareport.satyh, stdjabook.satyh, local.satyの改変によってできています.
+    この場を以って作成してくださった皆様へ感謝申し上げます.  ありがとうございます.
+  }
+  +section{stdjareport-with-id.saty}<
+    +subsection{追加, 改変された機能} <
+      +listing{
+        * タイトル部に学籍番号, 大学名を入れられるようになった(ref: stdjareport.saty)
+        * 目次を導入した(ref: stdjabook.saty)
+        * chapterを目次の対象にした
+        * ページ番号と総ページ数を右上に表示するようにした(ref: stdjareport, \@puripuri2100さん, \@mo_naqaさん)
+        * 画像を挿入できるようにブロックコマンドの+figureを作成した(ref: slack)
+        * フォントサイズの調整をした
+      }
+    >
+    +subsection{改善余地} <
+      +listing{
+        * footerで使われていたページ数の設定をそのまんま流用して弄ったので変数名がおかしい.
+        * テキスト文脈で使われているはずのデフォルトの文字サイズを小さくしたいが, どこかに設定がされているんだろうか.
+        * \\figureが使えない - なんか怒られるわけでもなく, ただ画像が出力されない. - 使い方を間違えているんだろうか.
+      }
+    >
+  >
+  +section{figure-insert.saty}<
+    +subsection{追加した機能} <
+      +p{ほとんどlocal.satyhです.}
+      +listing{
+        * 画像を貼ったら出てくる枠を削除した
+      }
+    >
+    +subsection{改善余地} <
+      +listing{
+        * \\figureが使えないことが惜しい
+      }
+    >
+  >
+  +section{背景}<
+    +p{
+      私は学生なんですが, レポートを提出する時に学籍番号だったり大学名が求められることがあります.
+      多分探したりなかっただけなんですが, そういうことができるパッケージがなかったことがきっかけです.
+      うちの大学のレポートは(?)フォーマットにうるさくて, 以前は\LaTeX;で書いてたもの頑張ってほとんど移植したのがこれになります.
+      初めて\SATySFi;を書いたので, プリミティブの使い方がおかしかったり, キモいことを書いていたら教えてください.
+      よろしくおねがいします.
+    }
+    +p{
+      こちら図\ref(`naru`);は最近の推し(成瀬なる)です.
+    }
+    +figure ?:(`naru`) {かわいい}<
+      +image-frame{\insert-image(40mm)(`naru.jpg`);}
+    >
+  >
+>
