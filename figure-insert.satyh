@@ -1,0 +1,29 @@
+@require: stdjareport-with-id
+@require: vdecoset
+@require: hdecoset
+@require: code
+
+let-inline ctx \insert-image w path =
+  let img = load-image path in
+    use-image-by-width img w
+
+let-inline ctx \insert-pdf n w path =
+  let img = load-pdf-image path n in
+    use-image-by-width img w
+  
+let-block ctx +centering it =
+  line-break true true ctx (inline-fil ++ read-inline ctx it ++ inline-fil)
+
+let-block ctx +image-frame content =
+  read-block ctx '<+centering{#content;}>
+  % let pads = (10pt, 10pt, 10pt, 10pt) in
+  % let decoset = VDecoSet.simple-frame-stroke 1pt Color.black in
+  %   block-frame-breakable ctx pads decoset (fun ctx -> read-block ctx '<+centering{#content;}>)
+
+let-block ctx +frame content =
+  let pads = (10pt, 10pt, 10pt, 10pt) in
+  let decoset = VDecoSet.simple-frame-stroke 1pt (Color.gray 0.75) in
+    block-frame-breakable ctx pads decoset (fun ctx -> read-block ctx content)
+
+let-block ctx +display-boxes content code =
+  read-block (ctx |> set-paragraph-margin 12pt 0pt) '<+frame(content);>
